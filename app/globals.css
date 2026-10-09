@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #17212e;
+  --color-body: #4a5768;
+  --color-navy-950: #071a30;
+  --color-navy-900: #0b2a4a;
+  --color-navy-800: #123a63;
+  --color-navy-700: #1a4d82;
+  --color-teal-300: #7fe3da;
+  --color-teal-400: #34cfc2;
+  --color-teal-500: #14b8aa;
+  --color-teal-700: #0b7c78;
+  --color-mist: #eef5fa;
+  --color-cloud: #f7fafc;
+  --color-line: #dbe5ee;
+
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
+
+  --shadow-soft: 0 1px 2px rgb(11 42 74 / 0.04), 0 12px 32px -12px rgb(11 42 74 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(11 42 74 / 0.05), 0 24px 48px -16px rgb(11 42 74 / 0.22);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--color-teal-300);
+  color: var(--color-navy-950);
+}
+
+/* Появление блоков при прокрутке: чистый CSS, без JS и без скачков макета.
+   В браузерах без scroll-driven animations блоки просто видны сразу. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Стрелка в FAQ */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
